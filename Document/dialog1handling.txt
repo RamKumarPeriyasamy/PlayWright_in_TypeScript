@@ -1,0 +1,55 @@
+## 1. Tests Included
+
+### **1. Login Test**
+**Test name:** `Login with valid credentials should succeed`  
+**Purpose:** Checks if an admin can log in successfully.  
+
+**Steps:**  
+- Opens the login page.  
+- Fills in username and password.  
+- Clicks the login button.  
+- Validates success:  
+  - If **"Invalid credentials"** shows up → the test fails.  
+  - If login succeeds → confirms the URL contains `/admin`.  
+
+**Playwright Features Used:**  
+- `page.locator().fill()` → Fill input fields.  
+- `page.click()` → Submit form.  
+- `locator.isVisible()` → Check if an error message appears.  
+- `expect(page).toHaveURL()` → Ensure correct navigation after login.  
+
+---
+
+### **2. Admin Actions Test**
+**Test name:** `dialog implementation`  
+**Purpose:** Automates **user creation, password change, and user deletion**.  
+
+**Steps:**  
+- Create two users (`reena` and `rahul`).  
+- Change the admin password from `admin123` → `admin1234`.  
+- Delete a user (`reena`) with confirmation.  
+
+**Playwright Features Used:**  
+- `page.locator().fill()` & `page.click()` → Fill forms and submit actions.  
+- `page.waitForTimeout()` → Add small waits for UI stability.  
+- **Dialog Handling:**  
+  - `page.once('dialog')` → Captures and accepts the **"Are you sure?"** confirmation popup.  
+- **Dynamic Locators:**  
+  - `page.locator('tr', { has: page.locator('td', { hasText: 'reena' }) })` → Find a specific table row (user + role).  
+
+---
+
+### **3. Placeholder Test**
+**Test name:** `sample for type dialog component`  
+**Purpose:** Reserved for future dialog-related testing (e.g., alert/confirm/prompt dialogs).  
+**Playwright Features Used:** *(Not implemented yet)*  
+
+---
+
+## 2. Playwright Features Used
+
+- **Headed Browser Mode:**  
+  ```ts
+  chromium.launch({ headless: false });
+  
+       ------- ------- -------- ------ ------ ------- 

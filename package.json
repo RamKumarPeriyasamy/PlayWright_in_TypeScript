@@ -1,0 +1,14 @@
+{
+  "name": "letplaywright",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^4.9.0"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.54.1"
+  }
+}

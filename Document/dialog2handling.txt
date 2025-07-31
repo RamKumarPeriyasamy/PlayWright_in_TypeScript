@@ -1,0 +1,113 @@
+# Playwright Test – User Management (Create & Delete)
+
+This Playwright suite automates the **creation** and **deletion** of users in an admin panel.  
+It is designed for **large user lists**, works with **real-time UI updates**, and ensures **reliable execution** with meaningful logs and screenshots.
+
+---
+
+## 1. What This Script Does
+- **Creates users** from `usersToCreate.json`.  
+- **Deletes users** from `usersToDelete.json`.  
+- Handles **dialogs, UI delays, and API responses** for reliability.  
+- **Logs results** and **captures screenshots** for any failures.  
+
+---
+
+## 2. How It Works (Step by Step)
+1. **Serial Execution**  
+   - Runs tests in order: **create** first, then **delete**.  
+   - Uses `test.describe.serial` to share a single browser session.
+
+2. **Headed Browser in Full Screen**  
+   - Launches **Chromium** in visible mode.  
+   - Uses `--start-maximized` and `viewport: null` for full-screen display.
+
+3. **Single Login for All Tests**  
+   - Logs in once in `beforeAll`.  
+   - Reuses the same session for both tests (faster).
+
+4. **Automatic Dialog Handling**  
+   - Accepts all popups (confirmations/alerts) during create/delete.  
+   - Prevents “already handled” errors using safe try-catch.
+
+5. **Smart Waiting**  
+   - **During creation**:  
+     - Waits for a successful API response (`/users` with status 200).  
+     - Waits for the new row to appear in the table.  
+   - **During deletion**:  
+     - Waits for the row to be removed from the table.
+
+6. **Skips Non-Existing Users**  
+   - Logs a warning and moves on if a user doesn’t exist during deletion.
+
+7. **Failure Handling**  
+   - Logs detailed error messages.  
+   - Captures **per-user screenshots** on failures.
+
+8. **Short Delays Between Actions**  
+   - Adds small pauses to avoid UI glitches with rapid actions.
+
+---
+
+## 3. Example Console Output
+
+Creating ..
+
+✅ Created user: mona
+Creating user 31/77: suresh
+Creation dialog: ✅ User created successfully!
+✅ Created user: suresh
+Creating user 32/77: rani
+Creation dialog: ✅ User created successfully!
+✅ Created user: rani
+
+Deleting ..
+🗑️ Deleted user: sanjay
+Deleting user 75/77: rashmi
+Creation dialog: Are you sure you want to delete this user?
+Dialog: Are you sure you want to delete this user?
+⚠️ Dialog already handled: Are you sure you want to delete thiis user?
+🗑️ Deleted user: rashmi
+Deleting user 76/77: kunal
+Creation dialog: Are you sure you want to delete this user?
+Dialog: Are you sure you want to delete this user?
+⚠️ Dialog already handled: Are you sure you want to delete thiis user?
+🗑️ Deleted user: kunal
+Deleting user 77/77: monika
+Creation dialog: Are you sure you want to delete this user?
+Dialog: Are you sure you want to delete this user?
+⚠️ Dialog already handled: Are you sure you want to delete thiis user?
+🗑️ Deleted user: monika
+
+
+---
+
+## 4. File Structure
+tests/
+alerts/
+dialog2.spec.ts # Playwright test script
+data/
+usersToCreate.json # User creation data
+usersToDelete.json # User deletion data
+screenshots/ # Screenshots of failed actions
+
+
+---
+
+## 5. Why This Approach?
+- **Fast** → Logs in only once.  
+- **Reliable** → Waits for API + UI confirmation.  
+- **Debug-Friendly** → Detailed logs and screenshots for failures.  
+- **Flexible** → Works with any size JSON user list.
+
+---
+
+## 6. Possible Improvements
+- **Add retry logic** for failed actions.  
+- **Generate a summary report** (e.g., “50 created, 3 failed, 45 deleted”).  
+- **Run in parallel** for very large datasets.
+
+---
+
+## Author
+This test was created to support robust user management automation in a Playwright-powered CI/CD environment.

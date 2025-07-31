@@ -1,0 +1,13 @@
+Learnings : 
+
+ 1) setup / complete 
+ 2) configure jest & Launch browser / complete
+ 3) First Script - Login Test / complete
+ 4) Recorded Script - Playwright CLI (npx Playwright codegen 185:....) / complete
+ 5) Record Video (adminDashboard.spec.ts) /complete
+ 6) Upload Files / not - complete /fileUpload.spec.ts
+ 7) How to Interact with different types inputs fields 
+ 8) Handle different types of alerts(Dialogs)
+ 9) Handle Select/Dropdown 
+   
+
