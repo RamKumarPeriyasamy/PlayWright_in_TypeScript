@@ -9,5 +9,5 @@ Learnings :
  7) How to Interact with different types inputs fields 
  8) Handle different types of alerts(Dialogs)
  9) Handle Select/Dropdown 
-   
+10) Window handling - switching between tabs
 

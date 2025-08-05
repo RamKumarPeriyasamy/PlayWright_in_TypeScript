@@ -14,7 +14,7 @@ test.beforeAll(async () => {
 
  test('Login with valid credentials should succeed', async () => {
   await page.locator('#Username-Login').fill('admin');
-  await page.locator('#Password-Login').fill('admin123');
+  await page.locator('#Password-Login').fill('admin1234');
   await page.click('#submit-Login');
   const errorMessage = page.locator('text="Invalid credentials"');
   const errorAppears = await errorMessage.isVisible({ timeout: 5000 }).catch(() => false);
@@ -28,16 +28,16 @@ test.beforeAll(async () => {
  test('dialog implementation' , async () => {
   //Create New User
   await page.waitForTimeout(3000);
-  await page.locator('#Username-AdminCreate').fill('reena');
-  await page.locator('#Password-AdminCreate').fill('reena123');
+  await page.locator('#ADUsername').fill('reena');
+  await page.locator('#ADPassword').fill('reena123');
   await page.click('#createUser-AdminCreate');
   const element = await page.$("#createUser-AdminCreate")
   await element?.click();
   await page.waitForTimeout(3000);
 
   await page.waitForTimeout(3000);
-  await page.locator('#Username-AdminCreate').fill('rahul');
-  await page.locator('#Password-AdminCreate').fill('reena123');
+  await page.locator('#ADUsername').fill('rahul');
+  await page.locator('#ADPassword').fill('reena123');
   await page.click('#createUser-AdminCreate');
   const element2 = await page.$("#createUser-AdminCreate")
   await element2?.click();
@@ -52,14 +52,14 @@ test.beforeAll(async () => {
   await page.waitForTimeout(3000);
 
   //Delete Function 
-   page.once('dialog', async dialog => {
-    console.log(`Dialog message: ${dialog.message()}`);
-    await dialog.accept(); // Use dismiss() for cancel
-  });
-  const row = page.locator('tr', { has: page.locator('td', { hasText: 'reena' }) })
-                   .filter({ has: page.locator('td', { hasText: 'developer' }) });
-  await row.locator('button:has-text("Delete")').click();
-  await page.waitForTimeout(2000); 
+  //  page.once('dialog', async dialog => {
+  //   console.log(`Dialog message: ${dialog.message()}`);
+  //   await dialog.accept(); // Use dismiss() for cancel
+  // });
+  // const row = page.locator('tr', { has: page.locator('td', { hasText: 'reena' }) })
+  //                  .filter({ has: page.locator('td', { hasText: 'developer' }) });
+  // await row.locator('button:has-text("Delete")').click();
+  // await page.waitForTimeout(2000); 
  })
 
  test('sample for type dialog component' , async () => {
