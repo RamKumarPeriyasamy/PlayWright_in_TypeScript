@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "types": ["@playwright/test"],
+        "types": ["@playwright/test" , "node"],
         "target": "es6",
         "strict": true,
         "module": "commonjs",

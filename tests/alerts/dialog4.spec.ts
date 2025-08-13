@@ -60,6 +60,7 @@ test.describe.serial('User Management Flow', () => {
     await page.waitForTimeout(500);
     await page.reload();
     await page.waitForLoadState('networkidle');
+   
 
     // Verify user is gone
     const stillThere = await section.locator('tr', { has: page.locator('td').filter({ hasText: new RegExp(`^${username}$`, 'i') }) }).count();
